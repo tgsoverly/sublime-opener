@@ -1,0 +1,11 @@
+#!/bin/bash
+if [ "$1" == "stop" ] ; then
+  curl http://localhost:8765/quit
+else
+  DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+  if `node $DIR/app.js &` 2>/dev/null ; then
+      echo 'command was successful'
+  else
+      echo 'damn, there was an error probably already running'
+  fi
+fi
