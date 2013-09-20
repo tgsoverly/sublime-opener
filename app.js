@@ -8,8 +8,13 @@ var app = express();
 
 app.get('/', function(req, res){
   var file = req.query.file
+  var line = req.query.line
+  if(line==undefined){
+    line = "0"
+  }
   if(file!=undefined){
-    exec("/usr/local/bin/subl "+file, function (error, stdout, stderr) {
+    console.log('Opening '+file+" "+line)
+    exec("/usr/local/bin/subl "+file+":"+line, function (error, stdout, stderr) {
       res.send('errors: ' + stderr + " out: "+stdout);  
       if (error !== null) {
         console.log('exec error: ' + error);
